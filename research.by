@@ -68,4 +68,4 @@ def create_research_report(match_id):
         "scorecard": scorecard,
         "research_status": "completed",
         "source": "OpenCricket API"
-    }
+    } 
