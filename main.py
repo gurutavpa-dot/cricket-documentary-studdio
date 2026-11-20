@@ -1,3 +1,6 @@
+from fastapi import FastAPI, HTTPException
+from datetime import datetime
+from research import create_research_report
 from fastapi import FastAPI
 from datetime import datetime
 
@@ -32,3 +35,19 @@ def features():
         "video_rendering": "Coming Soon",
         "youtube_upload": "Coming Soon"
     }
+@app.get("/research/{match_id}")
+def research_match(match_id: str):
+    try:
+        return create_research_report(match_id)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=503,
+            detail=str(error)
+        )
+
+    except Exception as error:
+        raise HTTPException(
+            status_code=502,
+            detail=str(error)
+        )
